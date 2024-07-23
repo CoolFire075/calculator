@@ -72,7 +72,6 @@ class _MyCalculatorState extends State<MyCalculator> {
               itemCount: notifier.historyList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
-                  // mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Expanded(
                       child: Text(
