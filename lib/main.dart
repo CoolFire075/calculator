@@ -89,88 +89,75 @@ class _MyCalculatorState extends State<MyCalculator> {
               },
             ),
           ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Text(
-                  notifier.firstNumber +
-                      notifier.action +
-                      notifier.secondNumber,
-                  style: const TextStyle(
-                    color: AppStyles.numberColor,
-                    fontSize: AppStyles.numberSize,
-                  ),
-                  textAlign: TextAlign.end,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        WidgetStatePropertyAll(AppStyles.iconColor),
-                  ),
-                  onPressed: () {
-                    notifier.removeAll();
-                  },
-                  child: const Text(
-                    'c',
-                    style: TextStyle(
-                      color: AppStyles.actionColor,
-                      fontSize: AppStyles.numberSize,
+          Consumer(
+            builder: (BuildContext context, value, Widget? child) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(AppStyles.iconColor),
+                      ),
+                      onPressed: () {
+                        notifier.removeAll();
+                      },
+                      child: const Text(
+                        'c',
+                        style: TextStyle(
+                          color: AppStyles.actionColor,
+                          fontSize: AppStyles.numberSize,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  style: AppStyles.buttonStyle,
-                  onPressed: () {
-                    notifier.remove();
-                  },
-                  child: const Icon(
-                    size: AppStyles.numberSize + 20,
-                    Icons.delete_forever_outlined,
-                    color: AppStyles.actionColor,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        WidgetStatePropertyAll(AppStyles.iconColor),
-                  ),
-                  onPressed: () {
-                    notifier.getPercent();
-                  },
-                  child: const Text(
-                    '%',
-                    style: TextStyle(
-                      color: AppStyles.actionColor,
-                      fontSize: AppStyles.numberSize,
+                  Expanded(
+                    child: ElevatedButton(
+                      style: AppStyles.buttonStyle,
+                      onPressed: () {
+                        notifier.remove();
+                      },
+                      child: const Icon(
+                        size: AppStyles.numberSize + 20,
+                        Icons.delete_forever_outlined,
+                        color: AppStyles.actionColor,
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    notifier.divide();
-                  },
-                  style: AppStyles.buttonStyle,
-                  child: SvgPicture.asset(
-                    height: AppStyles.numberSize + 20,
-                    AppStyles.divisionAssetName,
-                    color: Colors.orange,
+                  Expanded(
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(AppStyles.iconColor),
+                      ),
+                      onPressed: () {
+                        notifier.getPercent();
+                      },
+                      child: const Text(
+                        '%',
+                        style: TextStyle(
+                          color: AppStyles.actionColor,
+                          fontSize: AppStyles.numberSize,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ],
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        notifier.divide();
+                      },
+                      style: AppStyles.buttonStyle,
+                      child: SvgPicture.asset(
+                        height: AppStyles.numberSize + 20,
+                        AppStyles.divisionAssetName,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           Row(
             children: [
@@ -345,6 +332,34 @@ class _MyCalculatorState extends State<MyCalculator> {
   }
 }
 
+class CalculatorConsumerWidget extends StatelessWidget {
+  const CalculatorConsumerWidget({
+    super.key,
+    required this.notifier,
+  });
+
+  final CalculatorNotifier notifier;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      // mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Text(
+            notifier.firstNumber + notifier.action + notifier.secondNumber,
+            style: const TextStyle(
+              color: AppStyles.numberColor,
+              fontSize: AppStyles.numberSize,
+            ),
+            textAlign: TextAlign.end,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class NumberButton extends StatelessWidget {
   const NumberButton({
     super.key,
@@ -374,4 +389,20 @@ class NumberButton extends StatelessWidget {
     );
   }
 }
-
+// class CalculatorConsumerText extends StatelessWidget {
+//   const CalculatorConsumerText({
+//     super.key,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<CalculatorNotifier>(
+//       builder: (BuildContext context, value, Widget? child) {
+//         return Text(
+//           value.firstNumber,
+//           style: const TextStyle(fontSize: 50),
+//         );
+//       },
+//     );
+//   }
+// }
