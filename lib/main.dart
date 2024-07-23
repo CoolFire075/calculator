@@ -66,28 +66,7 @@ class _MyCalculatorState extends State<MyCalculator> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              itemCount: notifier.historyList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        notifier.historyList[index],
-                        style: const TextStyle(
-                          color: AppStyles.iconColor,
-                          fontSize: AppStyles.numberSize,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+          const CalculatorConsumerHistory(),
           const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -406,7 +385,41 @@ class CalculatorConsumerText extends StatelessWidget {
       builder: (BuildContext context, value, Widget? child) {
         return Text(
           value.firstNumber + value.action + value.secondNumber,
-          style: const TextStyle(fontSize: 50, color: Colors.white),
+          style: const TextStyle(fontSize: 60, color: Colors.white),
+        );
+      },
+    );
+  }
+}
+
+class CalculatorConsumerHistory extends StatelessWidget {
+  const CalculatorConsumerHistory({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<CalculatorNotifier>(
+      builder: (BuildContext context, value, Widget? child) {
+        return SizedBox(
+          height: 200,
+          child: ListView.builder(
+            itemCount: value.historyList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      value.historyList[index],
+                      style: const TextStyle(
+                        color: AppStyles.iconColor,
+                        fontSize: AppStyles.numberSize,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         );
       },
     );
