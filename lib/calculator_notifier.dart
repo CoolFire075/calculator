@@ -122,7 +122,7 @@ class CalculatorNotifier extends ChangeNotifier {
       secondNumber = secondNumber.substring(0, secondNumber.length - 1);
     }
     makeAction();
-    hasAction = true;
+    hasAction = false;
     action = '';
     notifyListeners();
   }
