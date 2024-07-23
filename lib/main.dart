@@ -88,6 +88,12 @@ class _MyCalculatorState extends State<MyCalculator> {
               },
             ),
           ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CalculatorConsumerText(),
+            ],
+          ),
           Consumer(
             builder: (BuildContext context, value, Widget? child) {
               return Row(
@@ -388,20 +394,21 @@ class NumberButton extends StatelessWidget {
     );
   }
 }
-// class CalculatorConsumerText extends StatelessWidget {
-//   const CalculatorConsumerText({
-//     super.key,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Consumer<CalculatorNotifier>(
-//       builder: (BuildContext context, value, Widget? child) {
-//         return Text(
-//           value.firstNumber,
-//           style: const TextStyle(fontSize: 50),
-//         );
-//       },
-//     );
-//   }
-// }
+
+class CalculatorConsumerText extends StatelessWidget {
+  const CalculatorConsumerText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<CalculatorNotifier>(
+      builder: (BuildContext context, value, Widget? child) {
+        return Text(
+          value.firstNumber + value.action + value.secondNumber,
+          style: const TextStyle(fontSize: 50, color: Colors.white),
+        );
+      },
+    );
+  }
+}
